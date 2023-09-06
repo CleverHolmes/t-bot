@@ -6,11 +6,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import WebDriverException
+import asyncio
 import json
 import os
 from time import sleep
 
-def main(email, represent, minor, legaldoc, fullname, mailing,URL):
+async def main(email, represent, minor, legaldoc, fullname, mailing,URL):
   chrome_options = Options()
   driver = webdriver.Chrome(options=chrome_options)
   driver.maximize_window()
@@ -32,6 +33,8 @@ def main(email, represent, minor, legaldoc, fullname, mailing,URL):
 
   wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input[name="DeathCertificateUpload[]"]')))
   driver.find_element(By.CSS_SELECTOR, 'input[name="DeathCertificateUpload[]"]').send_keys(os.path.join(os.getcwd(), 'deathcert.png'))
+
+  sleep(4)
   
   if represent:
     driver.find_elements(By.CSS_SELECTOR, 'label._55sh.uiInputLabelInput')[0].click()
@@ -62,7 +65,6 @@ def main(email, represent, minor, legaldoc, fullname, mailing,URL):
   else:
     driver.find_elements(By.CSS_SELECTOR, 'label._55sh.uiInputLabelInput')[1].click()
   
-  sleep(60)
+  driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
   
-  
-main('trustle@com', True, False, True , 'trustle', 'test', 'mainurl')
+asyncio.run(main('trustle@com', True, False, True , 'trustle', 'test', 'mainurl'))
