@@ -35,7 +35,7 @@ async def main(fullname, email, tname, owener, info):
   driver.find_element(By.CSS_SELECTOR, 'input[name="Reported_Screen_Name__c"]').send_keys(tname)
   driver.find_element(By.CSS_SELECTOR, 'input[name="owner-full-name"]').send_keys(owener)
 
-  if info is not '':
+  if len(info) > 0:
     driver.find_element(By.CSS_SELECTOR, 'textarea[name="DescriptionText"]').send_keys(info)
   
   driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
