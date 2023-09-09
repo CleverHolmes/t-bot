@@ -24,7 +24,7 @@ import json
 import os
 from time import sleep
 
-async def main(fname, sname, username, email):
+async def main(fname, sname, username, email, option, altemail):
   chrome_options = Options()
   driver = webdriver.Chrome(options=chrome_options)
   driver.maximize_window()
@@ -40,6 +40,15 @@ async def main(fname, sname, username, email):
 
   driver.find_element(By.CSS_SELECTOR,'input[data-drupal-selector="edit-actions-about-you-1-wizard-next"]').click()
 
+  if option:
+    driver.find_element(By.CSS_SELECTOR,'label[for="edit-user-email-access-yes"]').click()
+    
+  else:
+    driver.find_element(By.CSS_SELECTOR,'label[for="edit-user-email-access-no"]').click()
+    
+    driver.find_element(By.CSS_SELECTOR,'input[data-drupal-selector="edit-user-other-emails-items-0-item-"]').send_keys(altemail)
+    
+
   sleep(60)
 
-asyncio.run(main('fname', 'sname', 'username', 'alexgector@gmail.com'))
+asyncio.run(main('fname', 'sname', 'username', 'alexgector@gmail.com',False, 'alter@gmail.com'))
