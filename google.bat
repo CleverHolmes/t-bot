@@ -1,4 +1,4 @@
 IF EXIST venv\Scripts\ (
     call venv\Scripts\activate
 )
-py pinterest/pinterest.py
+py google/google.py

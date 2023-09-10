@@ -1,1 +1,3 @@
-call venv/Scripts/activate
+IF EXIST venv\Scripts\ (
+    call venv\Scripts\activate
+)
