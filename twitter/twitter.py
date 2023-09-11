@@ -49,8 +49,5 @@ async def main(fullname, email, tname, owener, info):
     # Click the submit button
     driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
 
-    # Sleep for 60 seconds (you can adjust this as needed)
-    sleep(60)
-
 # Run the main function with example input
 asyncio.run(main('fullname', 'email', 'tname', 'taccount', 'optional'))

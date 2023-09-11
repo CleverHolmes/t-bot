@@ -9,8 +9,9 @@ from selenium.common.exceptions import WebDriverException
 import asyncio
 import json
 import os
-import autoit
+# import autoit
 from time import sleep
+import html
 
 async def main(dname, demail, rfname, rlname, remail, addr, city, country, zip, date, payee, addtional):
   chrome_options = Options()
@@ -41,22 +42,38 @@ async def main(dname, demail, rfname, rlname, remail, addr, city, country, zip, 
   driver.find_elements(By.CSS_SELECTOR, 'input[aria-label="Date of death"]')[0].send_keys(date)
   driver.find_elements(By.CSS_SELECTOR, 'input[aria-label="Date of death"]')[1].send_keys(date)
 
+  driver.find_elements(By.CSS_SELECTOR, 'label[class="material-checkbox"]')[1].click()
+
   driver.find_element(By.CSS_SELECTOR, 'input[aria-label="Desired payee name for the account"]').send_keys(payee)
 
-  driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Choose files"]').click()
+  # driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Choose files"]').click()
+  # autoit.win_wait_active("Open")
+  # file_route = os.path.join(os.getcwd(), 'doc.png')
+  # file_route = os.path.join(os.getcwd(), 'id.png')
+  # print(file_route)
+  # autoit.control_send("Open", "Edit1", ('''C:\\dev\\trustle\\trustle-bot\\google\\doc.png'''))
+  # autoit.control_send("Open", "Open", "{ENTER}")
 
   
-  autoit.win_wait_active("Open")
-  file_route = os.path.join(os.getcwd(), 'doc.png')
-  
-  autoit.control_send("Open", "Edit1", 'C:\\dev\\trustle\\trustle-bot\\google\\doc.png')
-  # autoit.control_send("Open", "Open", "{ENTER}")
-  # driver.find_element(By.CSS_SELECTOR, 'input[id="documents"]').send_keys(os.path.join(os.getcwd(), 'doc.png'))
+  driver.find_element(By.CSS_SELECTOR, 'input[id="documents"]').send_keys(os.path.join(os.getcwd(), 'doc.png'))
   # sleep(5)
-  # driver.find_element(By.CSS_SELECTOR, 'input[id="documents"]').send_keys(os.path.join(os.getcwd(), 'deathcert.png'))
+  driver.find_element(By.CSS_SELECTOR, 'input[id="documents"]').send_keys(os.path.join(os.getcwd(), 'deathcert.png'))
   # sleep(5)
-  # driver.find_element(By.CSS_SELECTOR, 'input[id="documents"]').send_keys(os.path.join(os.getcwd(), 'id.png'))
+  driver.find_element(By.CSS_SELECTOR, 'input[id="documents"]').send_keys(os.path.join(os.getcwd(), 'id.png'))
   
+  driver.find_elements(By.CSS_SELECTOR, 'button.scFormsUploadAttachmentremove-button')[0].click()
+  driver.find_elements(By.CSS_SELECTOR, 'button.scFormsUploadAttachmentremove-button')[0].click()
+  driver.find_elements(By.CSS_SELECTOR, 'button.scFormsUploadAttachmentremove-button')[0].click()
+  
+  driver.execute_script(f"window.scrollBy(0, 400);")
+  
+  driver.find_element(By.CSS_SELECTOR, 'textarea[name="additional_comments"]').send_keys(addtional)
+
+  # print(len(driver.find_elements(By.CSS_SELECTOR, 'input[type="checkbox"]')))
+  # driver.find_elements(By.CSS_SELECTOR, 'input[type="checkbox"]')[2].click()
+  
+  driver.find_element(By.CSS_SELECTOR, 'button[class="submit-button material2-button material2-button--filled"]').click()
   sleep(60)
 
 asyncio.run(main('dname', 'demail', 'rfname', 'rlname', 'remail', 'addr', 'city', 'country', 'zip', '9/10/2023', 'payee', 'addtional'))
+
